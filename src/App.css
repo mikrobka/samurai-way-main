@@ -10,19 +10,5 @@
 
     /* grid-gap: 10px; */
 }
-.header img{
-    width: 60px;
-}
 
-.header{
-    grid-area: h;
-    background-color: yellow;
-}
-.content{
-    grid-area: c;
-    background-color: violet;
-}
-.nav {
-    grid-area: n;
-    background-color: tan;
-}
+
