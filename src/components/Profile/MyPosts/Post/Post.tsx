@@ -4,6 +4,7 @@ import s from "./Post.module.css"
 
 type PostPropsType = {
     message:string
+    like:number
 }
 
 
@@ -14,7 +15,7 @@ export function Post(props:PostPropsType) {
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwnOYzJFxPyCk11rdkPsVHRaWW62B0_Du8Vw&usqp=CAU"/>
             {props.message}
             <div>
-                <span>1like</span>
+                <span>{props.like} likes</span>
             </div>
 
         </div>
