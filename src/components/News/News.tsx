@@ -4,7 +4,7 @@ import s from "./News.module.css"
 
 export function News() {
     return(
-        <div>
+        <div className={s.news}>
             News
         </div>
     );

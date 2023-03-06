@@ -9,15 +9,17 @@ color: red;
 
 .dialogsItems {
 padding: 10px;
+    color: black;
 }
 .dialogsItems .active{
-    color: gold;
+    color: black;
+
 }
 
 .messages {
 padding:10px;
 }
 
-.message {
-
+.messages .message{
+    color: black;
 }

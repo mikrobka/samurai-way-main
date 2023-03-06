@@ -2,20 +2,23 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 
-// type PostsPropsType = {
-//     message:string
-// }
+type PostsPropsType = {
+    postsData:Array<PostsType>
+}
+
+type PostsType = {
+    id:number
+    postMessage:string
+    likesCount:number
+}
 
 
-export function MyPosts() {
+export function MyPosts(props:PostsPropsType) {
 
-    let postsData = [
-        {id: 1, postMessage: "Yo", likesCount:10},
-        {id: 2, postMessage: "Hi how are you", likesCount:10},
-        {id: 3, postMessage: "This is my firs post", likesCount:10},
-        {id: 4, postMessage: "Yo", likesCount:10},
 
-    ]
+
+    let postsElements = props.postsData.map(p => <Post message={p.postMessage} like={p.likesCount}/>)
+
 
 
     return (
@@ -31,8 +34,7 @@ export function MyPosts() {
                     </div>
                 </div>
                 <div className={s.posts} >
-                    <Post message={postsData[0].postMessage} like={postsData[0].likesCount}/>
-                    <Post message={postsData[1].postMessage} like={postsData[0].likesCount}/>
+                    {postsElements}
                 </div>
             </div>
         </div>

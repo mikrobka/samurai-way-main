@@ -8,6 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import state from "./SelfMadeRedux/state";
+
+
+
+
+
+
 
 function App() {
     return (
@@ -16,12 +23,11 @@ function App() {
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path="/messages" component={Dialogs}/>
-                <Route path="/profile" component={Profile}/>
-                <Route path="/news" component={News}/>
-                <Route path="/music" component={Music}/>
-                <Route path="/settings" component={Settings}/>
-
+                <Route path="/messages" render={()=> <Dialogs dialogsData={state.dialogsPage.dialogsData} messagesData={state.dialogsPage.messagesData}/>}/>
+                <Route path="/profile" render={()=> <Profile postData={state.profilePage.postsData}/>}/>
+                <Route path="/news" render={()=> <News/>}/>
+                <Route path="/music" render={()=> <Music/>}/>
+                <Route path="/settings" render={()=> <Settings/>}/>
             </div>
         </div>
         </BrowserRouter>
