@@ -1,3 +1,6 @@
+
+
+
 type MessageType = {
     id: number
     message: string
@@ -12,23 +15,27 @@ type PostsType = {
     id: number
     postMessage: string
     likesCount: number
+
 }
 
 type ProfilePageType = {
     postsData: Array<PostsType>
+    newPostsText: string
+
 }
 type DialogsPageType = {
-    dialogsData:Array<DialogType>
-    messagesData:Array<MessageType>
+    dialogsData: Array<DialogType>
+    messagesData: Array<MessageType>
+    newMessageText: string
 }
 
 export type RootStateType = {
-    profilePage:ProfilePageType
-    dialogsPage:DialogsPageType
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
 }
 
 
- let state:RootStateType = {
+let state: RootStateType = {
     profilePage: {
         postsData: [
             {id: 1, postMessage: "Yo", likesCount: 10},
@@ -36,6 +43,7 @@ export type RootStateType = {
             {id: 3, postMessage: "This is my firs post", likesCount: 10},
             {id: 4, postMessage: "Yo", likesCount: 10},
         ],
+        newPostsText: ""
     },
     dialogsPage: {
         dialogsData: [
@@ -54,9 +62,50 @@ export type RootStateType = {
             {id: 3, message: "Hi"},
             {id: 4, message: "Hello"},
             {id: 5, message: "Yo"},
-        ]
+        ],
+        newMessageText: ""
     }
 
+}
+
+
+export const addPost = () => {
+    const newPost: PostsType = {
+        id: 5,
+        postMessage: state.profilePage.newPostsText,
+        likesCount: 0
+    };
+    state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostsText = ""
+
+    rerenderEntierTree()
+}
+
+export const updateNewPostsText = (newText: string) => {
+    state.profilePage.newPostsText = newText
+    rerenderEntierTree()
+}
+
+export const addMessage = () => {
+    const newMessage: MessageType = {
+        id: 6,
+        message: state.dialogsPage.newMessageText
+    }
+    state.dialogsPage.messagesData.push(newMessage)
+    state.dialogsPage.newMessageText = ""
+    rerenderEntierTree()
+}
+
+export const updateNewMessageText = (newText: string) => {
+    state.dialogsPage.newMessageText = newText
+    rerenderEntierTree()
+}
+
+let rerenderEntierTree = () => {
+
+}
+export const subscribe = (observer:()=>void) => {
+    rerenderEntierTree = observer;
 }
 
 export default state

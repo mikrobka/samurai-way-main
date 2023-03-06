@@ -10,7 +10,6 @@ export const Message = (props: MessagePropsType) => {
     return (
         <div>
             <div className={s.message} key={props.key}>{props.message}</div>
-
         </div>
     )
 }
