@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
@@ -8,22 +8,16 @@ import { Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import state, {
-    addMessage,
-    addPost,
-    subscribe,
-    updateNewMessageText,
-    updateNewPostsText,
-} from "./SelfMadeRedux/state";
+import  {StoreType} from "./SelfMadeRedux/state";
 
 
+type AppPropsType = {
+    store:StoreType
+}
 
+const  App:React.FC<AppPropsType> = ({store}) => {
 
-
-
-
-
-function App() {
+    const state = store.getState()
     return (
 
         <div className="app-wrapper">
@@ -31,16 +25,14 @@ function App() {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path="/messages" render={()=> <Dialogs
-                    addMessage={addMessage}
-                    updateNewMessageText={updateNewMessageText}
+                    dispatch={store.dispatch.bind(store)}
                     newMessageText={state.dialogsPage.newMessageText}
                     dialogsData={state.dialogsPage.dialogsData}
                     messagesData={state.dialogsPage.messagesData}/>}/>
                 <Route path="/profile" render={()=> <Profile
-                    updateNewPostsText={updateNewPostsText}
                     newPostText={state.profilePage.newPostsText}
                     profileState={state.profilePage.postsData}
-                    addPost={addPost}/>}/>
+                    dispatch={store.dispatch.bind(store)}/>}/>
                 <Route path="/news" render={()=> <News/>}/>
                 <Route path="/music" render={()=> <Music/>}/>
                 <Route path="/settings" render={()=> <Settings/>}/>

@@ -2,13 +2,14 @@ import React from "react";
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {updateNewPostsText} from "../../SelfMadeRedux/state";
+import {} from "../../SelfMadeRedux/state";
+import {ProfileActionType} from "../../SelfMadeRedux/profileReducer";
+
 
 type ProfilePropsType = {
     profileState:Array<PostsDataType>
-    addPost:()=>void
+    dispatch:(action:ProfileActionType)=>void
     newPostText:string
-    updateNewPostsText:(newText:string)=>void
 }
 
 
@@ -23,7 +24,7 @@ export function Profile(props:ProfilePropsType) {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts newPostsText={props.newPostText} addPost={props.addPost} profileState={props.profileState} updateNewPostsText={updateNewPostsText}/>
+            <MyPosts newPostText={props.newPostText}  dispatch={props.dispatch} profileState={props.profileState}/>
         </div>
 
     );

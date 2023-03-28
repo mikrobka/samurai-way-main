@@ -2,14 +2,15 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import {} from "../../SelfMadeRedux/state";
+import { addMessageAC, DialogActionType, updateNewMassageTextAC} from "../../SelfMadeRedux/dialogReduсer";
 
 
 type DialogPropsType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
-    addMessage:()=>void
-    updateNewMessageText:(newText:string)=>void
     newMessageText:string
+    dispatch:(action:DialogActionType)=>void
 
 }
 
@@ -29,12 +30,12 @@ export const Dialogs = (props: DialogPropsType) => {
     let messagesElements = props.messagesData.map((m) => (<Message key={m.id} message={m.message}/>));
 
     const addMessage = () => {
-        props.addMessage()
+        props.dispatch(addMessageAC(props.newMessageText))
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let newText = e.currentTarget.value
-        props.updateNewMessageText(newText)
+        props.dispatch(updateNewMassageTextAC(newText))
     }
 
     return (

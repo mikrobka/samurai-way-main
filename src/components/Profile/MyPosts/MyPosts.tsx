@@ -1,24 +1,23 @@
-import React, {ChangeEvent, RefObject} from "react";
+import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {updateNewPostsText} from "../../../SelfMadeRedux/state";
-
-
+import {} from "../../../SelfMadeRedux/state";
+import { addPostAC, ProfileActionType, updateNewPostTextAC} from "../../../SelfMadeRedux/profileReducer";
 
 type PostsPropsType = {
     profileState: Array<PostsType>
-    addPost:()=>void
-    newPostsText:string
-    updateNewPostsText:(newText:string)=>void
+    dispatch:(action:ProfileActionType)=>void
+    newPostText:string
+
 
 }
-
 type PostsType = {
     id: number
     postMessage: string
     likesCount: number
 
 }
+
 
 
 export function MyPosts(props: PostsPropsType) {
@@ -28,15 +27,14 @@ export function MyPosts(props: PostsPropsType) {
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-
         if(newPostElement.current){
-            props.addPost()
+            props.dispatch(addPostAC(props.newPostText))
         }
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
             let newText = e.currentTarget.value
-            props.updateNewPostsText(newText)
+            props.dispatch(updateNewPostTextAC(newText))
     }
 
 
@@ -48,10 +46,10 @@ export function MyPosts(props: PostsPropsType) {
                 <h3>my posts</h3>
                 <div>
                     <div>
-                        <textarea placeholder={"New post"}  ref={newPostElement} value={props.newPostsText} onChange={onChangeHandler}/>
+                        <textarea placeholder={"New post"}  ref={newPostElement} value={props.newPostText} onChange={onChangeHandler}/>
                     </div>
                     <div>
-                        <button disabled={true ? props.newPostsText === "" : false} onClick={addPost}>Add post</button>
+                        <button disabled={props.newPostText === ""} onClick={addPost}>Add post</button>
                     </div>
                 </div>
                 <div className={s.posts}>
