@@ -2,8 +2,9 @@ import React from "react";
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {} from "../../SelfMadeRedux/state";
-import {ProfileActionType} from "../../SelfMadeRedux/profileReducer";
+import {} from "../../redux/self-made-store";
+import {ProfileActionType} from "../../redux/profileReducer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 type ProfilePropsType = {
@@ -24,7 +25,7 @@ export function Profile(props:ProfilePropsType) {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts newPostText={props.newPostText}  dispatch={props.dispatch} profileState={props.profileState}/>
+            <MyPostsContainer newPostText={props.newPostText}  dispatch={props.dispatch} profileState={props.profileState}/>
         </div>
 
     );

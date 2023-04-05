@@ -1,12 +1,13 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {} from "../../../SelfMadeRedux/state";
-import { addPostAC, ProfileActionType, updateNewPostTextAC} from "../../../SelfMadeRedux/profileReducer";
+import {} from "../../../redux/self-made-store";
+import { addPostAC, ProfileActionType, updateNewPostTextAC} from "../../../redux/profileReducer";
 
 type PostsPropsType = {
-    profileState: Array<PostsType>
-    dispatch:(action:ProfileActionType)=>void
+    posts: Array<PostsType>
+    updateNewPostText:(newText:string)=>void
+    addPost:()=>void
     newPostText:string
 
 
@@ -23,18 +24,17 @@ type PostsType = {
 export function MyPosts(props: PostsPropsType) {
 
 
-    const postsElements = props.profileState.map(p => <Post message={p.postMessage} like={p.likesCount}/>)
+    const postsElements = props.posts.map(p => <Post message={p.postMessage} like={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
         if(newPostElement.current){
-            props.dispatch(addPostAC(props.newPostText))
+         props.addPost()
         }
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-            let newText = e.currentTarget.value
-            props.dispatch(updateNewPostTextAC(newText))
+        props.updateNewPostText(e.currentTarget.value)
     }
 
 

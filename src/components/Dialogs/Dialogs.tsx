@@ -2,8 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {} from "../../SelfMadeRedux/state";
-import { addMessageAC, DialogActionType, updateNewMassageTextAC} from "../../SelfMadeRedux/dialogReduсer";
+import {} from "../../redux/self-made-store";
+import { addMessageAC, DialogActionType, updateNewMassageTextAC} from "../../redux/dialogReduсer";
 
 
 type DialogPropsType = {
