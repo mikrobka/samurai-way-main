@@ -1,14 +1,13 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {} from "../../../redux/self-made-store";
+import {RootStateType} from "../../../redux/self-made-store";
 import { addPostAC, ProfileActionType, updateNewPostTextAC} from "../../../redux/profileReducer";
 
 type PostsPropsType = {
-    posts: Array<PostsType>
     updateNewPostText:(newText:string)=>void
     addPost:()=>void
-    newPostText:string
+    state:RootStateType
 
 
 }
@@ -24,7 +23,7 @@ type PostsType = {
 export function MyPosts(props: PostsPropsType) {
 
 
-    const postsElements = props.posts.map(p => <Post message={p.postMessage} like={p.likesCount}/>)
+    const postsElements = props.state.profilePage.postsData.map(p => <Post message={p.postMessage} like={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
@@ -46,10 +45,10 @@ export function MyPosts(props: PostsPropsType) {
                 <h3>my posts</h3>
                 <div>
                     <div>
-                        <textarea placeholder={"New post"}  ref={newPostElement} value={props.newPostText} onChange={onChangeHandler}/>
+                        <textarea placeholder={"New post"}  ref={newPostElement} value={props.state.profilePage.newPostsText} onChange={onChangeHandler}/>
                     </div>
                     <div>
-                        <button disabled={props.newPostText === ""} onClick={addPost}>Add post</button>
+                        <button disabled={props.state.profilePage.newPostsText === ""} onClick={addPost}>Add post</button>
                     </div>
                 </div>
                 <div className={s.posts}>

@@ -1,14 +1,14 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {} from "../../../redux/self-made-store";
+import {StoreType} from "../../../redux/self-made-store";
 import { addPostAC, ProfileActionType, updateNewPostTextAC} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
+import {Store} from "redux";
 
 type PostsPropsType = {
-    profileState: Array<PostsType>
-    dispatch:(action:ProfileActionType)=>void
-    newPostText:string
+
+    store:StoreType
 
 
 }
@@ -23,17 +23,19 @@ type PostsType = {
 
 export function MyPostsContainer(props: PostsPropsType) {
 
+    const state = props.store.getState()
+
 
     const addPost = () => {
-        props.dispatch(addPostAC(props.newPostText))
+        props.store.dispatch(addPostAC(state.profilePage.newPostsText))
     }
 
     const onChangeHandler = (newText:string) => {
-        props.dispatch(updateNewPostTextAC(newText))
+        props.store.dispatch(updateNewPostTextAC(newText))
     }
 
 
 
 
-    return (<MyPosts newPostText={props.newPostText} updateNewPostText={onChangeHandler} addPost={addPost} posts={props.profileState} />)
+    return (<MyPosts  updateNewPostText={onChangeHandler} addPost={addPost} state={state} />)
 }
