@@ -2,19 +2,12 @@ import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {RootStateType} from "../../../redux/self-made-store";
-import { addPostAC, ProfileActionType, updateNewPostTextAC} from "../../../redux/profileReducer";
 
 type PostsPropsType = {
     updateNewPostText:(newText:string)=>void
     addPost:()=>void
     state:RootStateType
 
-
-}
-type PostsType = {
-    id: number
-    postMessage: string
-    likesCount: number
 
 }
 
