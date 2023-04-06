@@ -2,48 +2,31 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {RootStateType} from "../../redux/self-made-store";
-import { addMessageAC, DialogActionType, updateNewMassageTextAC} from "../../redux/dialogReduсer";
+import {DialogsPropsType} from "./DialogsContainer";
+import {updateNewMassageTextAC} from "../../redux/dialogReduсer";
 
 
-type DialogPropsType = {
 
-    addMessage:()=>void
-    onChangeMessage:(newText:string)=>void
-    state:RootStateType
 
-}
-
-type DialogType = {
-    id: number
-    name: string
-
-}
-
-type MessageType = {
-    id: number
-    message: string
-}
-
-export const Dialogs = (props: DialogPropsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
     const addMessage = () => {
-        props.addMessage()
+        props.addMessage(props.dialogsPage.newMessageText)
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChangeMessage(e.currentTarget.value)
+        props.updateNewMassageText(e.currentTarget.value)
     }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.state.dialogsPage.dialogsData.map((d) => (<DialogItem id={d.id} name={d.name}/>))}
+                {props.dialogsPage.dialogsData.map((d) => (<DialogItem id={d.id} name={d.name}/>))}
             </div>
             <div className={s.messages}>
-                {props.state.dialogsPage.messagesData.map((m) => (<Message key={m.id} message={m.message}/>))}
+                {props.dialogsPage.messagesData.map((m) => (<Message key={m.id} message={m.message}/>))}
             </div>
             <div className={s.messages}>
-                <textarea placeholder={"enter your message"} value={props.state.dialogsPage.newMessageText} onChange={onChangeHandler}></textarea>
+                <textarea placeholder={"enter your message"} value={props.dialogsPage.newMessageText} onChange={onChangeHandler}></textarea>
             </div>
             <div className={s.messages}>
                 <button onClick={addMessage}>Send message</button>

@@ -1,3 +1,4 @@
+import {text} from "stream/consumers";
 
 export type ProfileActionType = AddPostAT | UpdateNewPostTextAT
 export type PostsType = {
@@ -7,17 +8,20 @@ export type PostsType = {
 
 }
 
+export type InitialStateType = typeof initialState
+
+
 const initialState = {
     postsData: [
         {id: 1, postMessage: "Yo", likesCount: 10},
         {id: 2, postMessage: "Hi how are you", likesCount: 10},
         {id: 3, postMessage: "This is my firs post", likesCount: 10},
         {id: 4, postMessage: "Yo", likesCount: 10},
-    ],
+    ] as Array<PostsType>,
         newPostsText: ""
 }
 
-export const profileReducer = (state = initialState, action: ProfileActionType) => {
+export const profileReducer = (state:InitialStateType = initialState, action: ProfileActionType):InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsType = {
@@ -25,12 +29,15 @@ export const profileReducer = (state = initialState, action: ProfileActionType) 
                 postMessage: state.newPostsText,
                 likesCount: 0
             };
-            state.postsData.push(newPost);
-            state.newPostsText = ""
-            break;
+            return {
+                ...state,
+                postsData: [...state.postsData,newPost],
+                newPostsText: ""
+            }
+
         case "UPDATE-NEW-POST-TEXT":
-            state.newPostsText = action.payload.text
-            break;
+           return {...state,newPostsText: action.payload.text}
+
     }
     return state
 
