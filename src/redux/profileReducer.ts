@@ -9,14 +9,14 @@ export type PostsType = {
 }
 
 type ContactsType = {
-    facebook: string
-    website: string
-    vk: string
-    twitter: string
-    instagram: string
-    youtube: string
-    github: string
-    mainLink: string
+    facebook: string|null
+    website: string|null
+    vk: string|null
+    twitter: string|null
+    instagram: string|null
+    youtube: string|null
+    github: string|null
+    mainLink: string|null
 }
 
 export type ProfileType = {
