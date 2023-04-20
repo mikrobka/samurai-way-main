@@ -20,7 +20,9 @@ export function MyPosts(props:PostsPropsType ) {
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+            props.updateNewPostText(e.currentTarget.value)
+
+
     }
 
 

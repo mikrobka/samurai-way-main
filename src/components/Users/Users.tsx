@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {InitialStateType} from "../../redux/usersReducer";
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
     pages:Array<number>
@@ -20,7 +21,9 @@ export const Users = (props:UserPropsType) => {
 
             {props.usersPage.users.map(u => <div key={u.id}>
                 <div>
+                    <NavLink to={'/profile/' + u.id}>
                     <div><img className={s.avatar} src={u.photos.small && u.photos.large} alt=""/></div>
+                    </NavLink>
                     {u.followed ? <button onClick={() => props.unfollowUser(u.id)}>Unfollow</button> : <button onClick={() => props.followUser(u.id)}>Follow</button>}
                 </div>
                 <div>
