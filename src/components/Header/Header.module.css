@@ -6,3 +6,9 @@
     grid-area: h;
     background-color: burlywood;
 }
+
+.loginBlock{
+    display: flex;
+    justify-content: right ;
+    margin-right: 140px;
+}
