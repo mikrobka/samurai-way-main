@@ -1,34 +1,31 @@
 import React from "react";
-import {addMessageAC, InitialStateType, updateNewMassageTextAC} from "../../redux/dialogReduсer";
+import {
+    addMessage,
+    InitialStateType,
+    updateNewMassageText,
+} from "../../redux/dialogReduсer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/store";
 
 
 
 
-type mapStatePropsType = {
+type mapStatePropsType = { // типизируем данные в контейнере
     dialogsPage:InitialStateType
 }
 
-type MapDispatchPropsType = {
+type MapDispatchPropsType = { // типизируем функции в контейнере
     addMessage:(newMessageText:string) => void
     updateNewMassageText:(newText:string)=>void
 }
 
-export type DialogsPropsType = mapStatePropsType & MapDispatchPropsType
+export type DialogsPropsType = mapStatePropsType & MapDispatchPropsType // делаем общий тип
 
  const mapStateToProps = (state:AppStateType):mapStatePropsType => {
     return {
-        dialogsPage:state.dialogsPage
+        dialogsPage:state.dialogsPage // получаем данные из сейта
     }
  }
-const mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
-        return{
-            addMessage:(newMessageText:string)=> {dispatch(addMessageAC(newMessageText))},
-            updateNewMassageText:(newText:string)=>{dispatch(updateNewMassageTextAC(newText))}
-        }
-}
 
-export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect(mapStateToProps,{addMessage,updateNewMassageText})(Dialogs)

@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type ProfileActionType = AddPostAT | UpdateNewPostTextAT | SetUserProfileAT
 
@@ -85,6 +87,18 @@ export const updateNewPostText = (text: string) => {
 
 export const setUserProfile = (profile: ProfileType) => {
     return {type: "SET-USER-PROFILE", payload: {profile}} as const
+}
+
+export const getProfile = (userId:string) => {
+    return (dispatch:Dispatch<ProfileActionType>)=>{
+        let id = userId
+        if (!id) {
+            id = "2"
+        }
+        profileAPI.getProfile(id).then(response => {
+            dispatch(setUserProfile(response.data))
+        });
+    }
 }
 
 

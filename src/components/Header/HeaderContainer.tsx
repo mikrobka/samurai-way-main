@@ -1,38 +1,29 @@
 import React from "react";
 import {Header} from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {AuthType, setUserData} from "../../redux/auth-reducer";
+import {authMyProfile, AuthType} from "../../redux/auth-reducer";
 
-type MapStateToPropsType = {
+
+type MapStateToPropsType = { // типизация того что приходит в нашу контейнерную компоненту
     auth:AuthType
 }
 
-type MapDispatchToPropsType = {
-    setUserData:(userData:AuthType)=>void
-
+type MapDispatchToPropsType = { // типизация функции что пришли в контейнер
+    authMyProfile:()=>void
 }
 
 
 const  MapStateToProps = (state:AppStateType):MapStateToPropsType => ({
-    auth:state.auth
+    auth:state.auth // получаем из стейта нужные нам данные
 })
 
-type PropsType = MapDispatchToPropsType & MapStateToPropsType
+type PropsType = MapDispatchToPropsType & MapStateToPropsType // склеиваем наши пропсы
 
  class HeaderContainer extends React.Component<PropsType>  {
 
     componentDidMount() {
-        // this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
-            withCredentials:true
-        }).then(response => {
-                if(response.data.resultCode === 0){
-                    console.log(response.data.data.login)
-                    this.props.setUserData(response.data.data)
-                }
-        });
+      this.props.authMyProfile() // логинимся с помощью нашего санк криэйтора
     }
 
     render(){
@@ -44,4 +35,4 @@ type PropsType = MapDispatchToPropsType & MapStateToPropsType
  }
 
 
- export default connect(MapStateToProps,{setUserData})(HeaderContainer)
+ export default connect(MapStateToProps,{authMyProfile})(HeaderContainer)

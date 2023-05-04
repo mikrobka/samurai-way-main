@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 export type AuthActionType = toggleIsFetchingAT | SetUserDataAT
 export type AuthType = {
    userId:number|null
@@ -41,5 +44,16 @@ export const toggleIsFetching = (isFetching: boolean) => {
 }
 export const setUserData = (userData: AuthType) => {
     return {type: "SET-USER-DATA", payload: {userData}} as const
+}
+
+
+export const authMyProfile = () => {
+    return (dispatch:Dispatch<AuthActionType>) => {
+        authAPI.getAuthUser().then(response => {
+            if(response.data.resultCode === 0){
+                dispatch(setUserData(response.data.data))
+            }
+        });
+    }
 }
 

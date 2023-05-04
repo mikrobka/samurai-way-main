@@ -21,6 +21,7 @@ const App: React.FC = () => {
             <HeaderContainer/>
             <Navbar/>
             <div className="app-wrapper-content">
+                {/*// пас ренднрит нам страницу как только видет в аресной строке требуемый урл */}
                 <Route path="/messages" render={() => <DialogsContainer/>}/>
                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                 <Route path="/users" render={() => <UsersContainer />}/>

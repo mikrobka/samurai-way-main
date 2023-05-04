@@ -1,8 +1,9 @@
-import {combineReducers, createStore, legacy_createStore} from "redux";
-import {profileReducer} from "./profileReducer";
-import {dialogReducer} from "./dialogReduсer";
-import {userReducer} from "./usersReducer";
-import {authReducer} from "./auth-reducer";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
+import {ProfileActionType, profileReducer} from "./profileReducer";
+import {DialogActionType, dialogReducer} from "./dialogReduсer";
+import {UserActionType, userReducer} from "./usersReducer";
+import {AuthActionType, authReducer} from "./auth-reducer";
+import thunkMiddlewhere from 'redux-thunk'
 
 
 let RootReducer = combineReducers({
@@ -15,8 +16,9 @@ let RootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof RootReducer>
 
+export type AppActionType = AuthActionType | DialogActionType |  ProfileActionType | UserActionType
 
-export let store = legacy_createStore(RootReducer)
+export let store = legacy_createStore(RootReducer,applyMiddleware(thunkMiddlewhere))
 
 // @ts-ignore
 window.store = store

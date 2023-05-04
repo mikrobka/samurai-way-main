@@ -7,8 +7,9 @@ import {store} from "./redux/store";
 import {Provider} from "react-redux";
 
 
-export const rerenderEntierTree = () => {
     ReactDOM.render(
+        //оборачиваем все приложение чтоб можно было пользоваться роутингами
+        // Провайдер передает стейт нашему прилодению
         <BrowserRouter>
             <Provider store={store}>
             <App/>
@@ -16,6 +17,5 @@ export const rerenderEntierTree = () => {
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
-rerenderEntierTree()
-store.subscribe(rerenderEntierTree);
+
+

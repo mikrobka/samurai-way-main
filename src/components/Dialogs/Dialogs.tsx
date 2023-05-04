@@ -3,18 +3,17 @@ import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {updateNewMassageTextAC} from "../../redux/dialogReduсer";
 
 
 
 
 export const Dialogs = (props: DialogsPropsType) => {
     const addMessage = () => {
-        props.addMessage(props.dialogsPage.newMessageText)
+        props.addMessage(props.dialogsPage.newMessageText) // добавляет сообщение засетаное в стейте
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMassageText(e.currentTarget.value)
+        props.updateNewMassageText(e.currentTarget.value) // сетает сообщение в стейт
     }
 
     return (
