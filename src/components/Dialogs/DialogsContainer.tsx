@@ -4,9 +4,11 @@ import {
     InitialStateType,
     updateNewMassageText,
 } from "../../redux/dialogReduсer";
-import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {Dialogs} from "./Dialogs";
+import {compose} from "redux";
 
 
 
@@ -24,8 +26,8 @@ export type DialogsPropsType = mapStatePropsType & MapDispatchPropsType // де�
 
  const mapStateToProps = (state:AppStateType):mapStatePropsType => {
     return {
-        dialogsPage:state.dialogsPage // получаем данные из сейта
+        dialogsPage:state.dialogsPage, // получаем данные из сейта
     }
  }
 
-export const DialogsContainer = connect(mapStateToProps,{addMessage,updateNewMassageText})(Dialogs)
+ export default compose<React.ComponentType>(connect(mapStateToProps,{addMessage,updateNewMassageText}),withAuthRedirect)(Dialogs)

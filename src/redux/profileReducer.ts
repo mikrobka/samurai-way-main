@@ -91,6 +91,7 @@ export const setUserProfile = (profile: ProfileType) => {
 
 export const getProfile = (userId:string) => {
     return (dispatch:Dispatch<ProfileActionType>)=>{
+        debugger
         let id = userId
         if (!id) {
             id = "2"

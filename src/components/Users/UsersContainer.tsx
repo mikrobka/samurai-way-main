@@ -9,6 +9,8 @@ import {
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 type mapStatePropsType = {
     usersPage: InitialStateType
     pageSize: number
@@ -73,12 +75,11 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => {
 }
 
 
-export const UsersContainer = connect(mapStateToProps,
+export default compose<React.ComponentType>(withAuthRedirect, connect(mapStateToProps,
     {
         followUser,
         unfollowUser,
         setPage,
         followingInProgress,
         getUser
-    })
-(UsersClassComponent)
+    }))(UsersClassComponent)

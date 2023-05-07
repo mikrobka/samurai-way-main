@@ -1,11 +1,12 @@
 import React from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {getProfile, ProfileType, setUserProfile} from "../../redux/profileReducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {profileAPI} from "../../api/api";
+import {getProfile, ProfileType} from "../../redux/profileReducer";
+import { RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+
 
 type PathParamsType = {
     userId: string
@@ -22,6 +23,9 @@ type MapDispatchToProps = {
 export type ProfilePropsType = MapStateToProps & MapDispatchToProps
 type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
+
+
+
 export class ProfileClassComponent extends React.Component<PropsType> {
 
     componentDidMount() {
@@ -29,6 +33,7 @@ export class ProfileClassComponent extends React.Component<PropsType> {
     }
 
     render() {
+
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         );
@@ -36,12 +41,15 @@ export class ProfileClassComponent extends React.Component<PropsType> {
 
 }
 
+
 const MapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
     }
 }
 
-let WithRouteProfile = withRouter(ProfileClassComponent)
+// let WithRouteProfile = withRouter(AuthRedirectComponent)
 
-export default connect(MapStateToProps, {getProfile})(WithRouteProfile)
+// export default withAuthRedirect (connect(MapStateToProps, {getProfile})(WithRouteProfile))
+
+export default compose<React.ComponentType>(connect(MapStateToProps, {getProfile}),withRouter,withAuthRedirect,)(ProfileClassComponent)

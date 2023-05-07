@@ -3,11 +3,13 @@ import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 
 
 
 export const Dialogs = (props: DialogsPropsType) => {
+
     const addMessage = () => {
         props.addMessage(props.dialogsPage.newMessageText) // добавляет сообщение засетаное в стейте
     }
