@@ -1,10 +1,11 @@
 import React from "react";
 import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
-import {AuthType} from "../../redux/auth-reducer";
+import {AuthType, InitialStateType, logoutData} from "../../redux/auth-reducer";
 
 type HeaderPropsType = {
-    auth:AuthType
+    auth:InitialStateType
+    logoutData:()=>void
 }
 
 export const  Header:React.FC<HeaderPropsType> = (props) => {
@@ -16,8 +17,9 @@ export const  Header:React.FC<HeaderPropsType> = (props) => {
             alt={"Not found"}/>
 
             <div className={s.loginBlock}>
-                {props.auth.isAuth ? <div>{props.auth.login}</div> : <NavLink to={'/login'}>Login</NavLink> }
+                {props.auth.isAuth ? <div>{props.auth.login} - <NavLink to={'/login'} onClick={props.logoutData}>Log out</NavLink></div> : <NavLink  to={'/login'}>Log in</NavLink> }
             </div>
+
         </header>
     );
  }

@@ -10,17 +10,17 @@ export type FormDataType = {
     rememberMe:boolean
 }
 
-const maxLength20 = maxLength(20)
+const maxLength50 = maxLength(50)
 
 const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <>
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <Field placeholder={"login"} name={'login'} component={Input} validate={[requiredField,maxLength20]}/>
+                    <Field placeholder={"login"} name={'login'} component={Input} validate={[requiredField,maxLength50]}/>
                 </div>
                 <div>
-                    <Field placeholder={"password"} name={'password'} component={Input} validate={[requiredField,maxLength20]}/>
+                    <Field placeholder={"password"} name={'password'} type={'password'} component={Input} validate={[requiredField,maxLength50]}/>
                 </div>
                 <div>
                     <Field component={'input'} name={'rememberMe'} type={'checkbox'}/>Remember me

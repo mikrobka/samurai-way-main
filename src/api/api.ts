@@ -44,7 +44,10 @@ export const authAPI = {
     getAuthUser(){
        return instance.get('auth/me')
     },
-    submitLoginData(data:FormDataType){
+    login(data:FormDataType){
         return instance.post('auth/login',{email:data.login,password:data.password,rememberMe:data.rememberMe})
+    },
+    logout(){
+        return instance.delete('auth/login')
     }
 }

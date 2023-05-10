@@ -2,15 +2,17 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {authMyProfile, AuthType} from "../../redux/auth-reducer";
+import {authMyProfile, InitialStateType, logoutData} from "../../redux/auth-reducer";
+
 
 
 type MapStateToPropsType = { // типизация того что приходит в нашу контейнерную компоненту
-    auth:AuthType
+    auth:InitialStateType
 }
 
 type MapDispatchToPropsType = { // типизация функции что пришли в контейнер
     authMyProfile:()=>void
+    logoutData:()=>void
 }
 
 
@@ -35,4 +37,4 @@ type PropsType = MapDispatchToPropsType & MapStateToPropsType // склеива�
  }
 
 
- export default connect(MapStateToProps,{authMyProfile})(HeaderContainer)
+ export default connect(MapStateToProps,{authMyProfile,logoutData})(HeaderContainer)
