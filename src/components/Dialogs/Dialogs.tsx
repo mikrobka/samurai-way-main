@@ -1,21 +1,18 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
+import {DialogReduxForm, MessageFormType} from "./DialogForm/DialogForm";
 
 
 
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const addMessage = () => {
-        props.addMessage(props.dialogsPage.newMessageText) // добавляет сообщение засетаное в стейте
-    }
 
-    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMassageText(e.currentTarget.value) // сетает сообщение в стейт
+    const addNewMessage = (message:MessageFormType) => {
+        props.addMessage(message.message)
     }
 
     return (
@@ -26,13 +23,8 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {props.dialogsPage.messagesData.map((m) => (<Message key={m.id} message={m.message}/>))}
             </div>
-            <div className={s.messages}>
-                <textarea placeholder={"enter your message"} value={props.dialogsPage.newMessageText} onChange={onChangeHandler}></textarea>
-            </div>
-            <div className={s.messages}>
-                <button onClick={addMessage}>Send message</button>
-            </div>
 
+            <DialogReduxForm onSubmit={addNewMessage}/>
         </div>
     )
 }

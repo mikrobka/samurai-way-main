@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profileReducer";
-import {Preloader} from "../../Preloader/Preloader";
+import {Preloader} from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 
@@ -16,7 +16,7 @@ type ProfileInfoPropsType = {
 
 export const ProfileInfo = (props:ProfileInfoPropsType) => {
 
-    if(!props.profile){
+    if(!props.profile){ // если не пришел профайл показываем прелоадер
         return <Preloader/>
     }
     else {

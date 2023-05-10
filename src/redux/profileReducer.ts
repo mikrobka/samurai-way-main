@@ -1,7 +1,7 @@
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-export type ProfileActionType = AddPostAT | UpdateNewPostTextAT | SetUserProfileAT | SetStatusAT
+export type ProfileActionType = AddPostAT  | SetUserProfileAT | SetStatusAT
 
 export type PostsType = {
     id: number
@@ -42,7 +42,6 @@ export const initialState = {
         {id: 3, postMessage: "This is my firs post", likesCount: 10},
         {id: 4, postMessage: "Yo", likesCount: 10},
     ] as Array<PostsType>,
-    newPostsText: "" as string,
     profile: {} as ProfileType,
     status: "" as string
 }
@@ -52,17 +51,14 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
         case "ADD-POST":
             const newPost: PostsType = {
                 id: 5,
-                postMessage: state.newPostsText,
+                postMessage: action.payload.newPostText,
                 likesCount: 0
             };
             return {
                 ...state,
                 postsData: [...state.postsData, newPost],
-                newPostsText: ""
             }
 
-        case "UPDATE-NEW-POST-TEXT":
-            return {...state, newPostsText: action.payload.text}
 
         case "SET-USER-PROFILE":
             return {...state, profile: action.payload.profile}
@@ -76,18 +72,12 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
 }
 export type AddPostAT = ReturnType<typeof addPost>
 
-export type UpdateNewPostTextAT = ReturnType<typeof updateNewPostText>
-
 export type SetUserProfileAT = ReturnType<typeof setUserProfile>
 
 export type SetStatusAT = ReturnType<typeof setStatus>
 
 export const addPost = (newPostText: string) => {
     return {type: "ADD-POST", payload: {newPostText}} as const
-}
-
-export const updateNewPostText = (text: string) => {
-    return {type: "UPDATE-NEW-POST-TEXT", payload: {text}} as const
 }
 
 export const setUserProfile = (profile: ProfileType) => {

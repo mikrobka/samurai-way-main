@@ -37,8 +37,17 @@ type ProfileStatusPropsType = {
         })
     }
 
+    componentDidUpdate(prevProps: ProfileStatusPropsType, prevState: {editMode:boolean,status:string}) {
+        // if(prevProps){
+        //     this.setState({
+        //         status:this.props.status
+        //     })
+        // }
 
-    render() {
+    }
+
+
+     render() {
         return (
             <>
                 {

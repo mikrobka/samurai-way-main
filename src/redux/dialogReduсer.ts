@@ -8,7 +8,7 @@ export type DialogType = {
 }
 
 
-export type DialogActionType = UpdateNewMessageTextAT | AddMessageAT
+export type DialogActionType =  AddMessageAT
 export type InitialStateType = typeof initialState
 
 const initialState = {
@@ -29,7 +29,6 @@ const initialState = {
         {id: 4, message: "Hello"},
         {id: 5, message: "Yo"},
     ] as Array<MessageType>,
-    newMessageText: ""
 }
 
 
@@ -38,11 +37,10 @@ export const dialogReducer = (state: InitialStateType = initialState, action: Di
         case "ADD-MESSAGE":
             const newMessage: MessageType = {
                 id: 6,
-                message: state.newMessageText
+                message: action.payload.newMessageText
             }
-            return {...state, messagesData: [...state.messagesData, newMessage], newMessageText: ""}
-        case "UPDATE-NEW-MESSAGE-TEXT":
-           return {...state,newMessageText: action.payload.newText}
+            return {...state, messagesData: [...state.messagesData, newMessage]}
+
     }
     return state
 }
@@ -50,10 +48,8 @@ export const dialogReducer = (state: InitialStateType = initialState, action: Di
 export const addMessage = (newMessageText: string) => {
     return {type: "ADD-MESSAGE", payload: {newMessageText}} as const
 }
-export const updateNewMassageText = (newText: string) => {
-    return {type: "UPDATE-NEW-MESSAGE-TEXT", payload: {newText}} as const
-}
 
-type UpdateNewMessageTextAT = ReturnType<typeof updateNewMassageText>
+
+
 type AddMessageAT = ReturnType<typeof addMessage>
 

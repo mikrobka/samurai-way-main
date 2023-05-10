@@ -12,7 +12,7 @@ import {Provider} from "react-redux";
         // Провайдер передает стейт нашему прилодению
         <BrowserRouter>
             <Provider store={store}>
-            <App/>
+            <App />
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')

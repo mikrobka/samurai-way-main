@@ -2,7 +2,6 @@ import React from "react";
 import {
     addMessage,
     InitialStateType,
-    updateNewMassageText,
 } from "../../redux/dialogReduсer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
@@ -18,8 +17,7 @@ type mapStatePropsType = { // типизируем данные в контей�
 }
 
 type MapDispatchPropsType = { // типизируем функции в контейнере
-    addMessage:(newMessageText:string) => void
-    updateNewMassageText:(newText:string)=>void
+    addMessage:(message:string)=>void
 }
 
 export type DialogsPropsType = mapStatePropsType & MapDispatchPropsType // делаем общий тип
@@ -30,4 +28,4 @@ export type DialogsPropsType = mapStatePropsType & MapDispatchPropsType // де�
     }
  }
 
- export default compose<React.ComponentType>(connect(mapStateToProps,{addMessage,updateNewMassageText}),withAuthRedirect)(Dialogs)
+ export default compose<React.ComponentType>(connect(mapStateToProps,{addMessage}),withAuthRedirect)(Dialogs)
