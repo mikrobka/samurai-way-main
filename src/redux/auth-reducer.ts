@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {FormDataType} from "../components/Login/LoginForm/LoginForm";
+import {stopSubmit} from "redux-form";
 
 export type AuthActionType = toggleIsFetchingAT | SetUserDataAT
 
@@ -64,6 +65,8 @@ export const loginData = (data:FormDataType) => {
             if (response.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(authMyProfile())
+            }else{
+                dispatch(<toggleIsFetchingAT | SetUserDataAT>stopSubmit('login', {_error: response.data.messages[0]}))
             }
         });
     }

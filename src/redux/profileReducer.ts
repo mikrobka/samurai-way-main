@@ -90,11 +90,7 @@ export const setStatus = (status: string) => {
 
 export const getProfile = (userId: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
-        let id = userId
-        if (!id) {
-            id = "15239"
-        }
-        profileAPI.getProfile(id).then(response => {
+        profileAPI.getProfile(userId).then(response => {
             dispatch(setUserProfile(response.data))
         });
     }
@@ -102,11 +98,7 @@ export const getProfile = (userId: string) => {
 
 export const getStatus = (userId: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
-        let id = userId
-        if (!id) {
-            id = "15239"
-        }
-        profileAPI.getStatus(id).then(res => {
+        profileAPI.getStatus(userId).then(res => {
             dispatch(setStatus(res.data))
         })
     }

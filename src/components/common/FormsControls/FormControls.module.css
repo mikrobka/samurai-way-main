@@ -1,12 +1,22 @@
-.form-control{
+.form-control {
 
 }
 
 .formControl.error input,
-.formControl.error textarea{
- border: solid 1px red;
+.formControl.error textarea {
+    border: solid 1px red;
 }
 
-.formControl.error span{
- color:red
+.formControl.error span {
+    color: red
+}
+
+
+.formSummaryError {
+    border: red 1px solid;
+    padding: 5px;
+    color: #c22a2a;
+    width: 150px;
+    display: flex;
+    justify-content: center;
 }

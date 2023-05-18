@@ -16,6 +16,7 @@ type PathParamsType = {
 type MapStateToProps = {
     profile: ProfileType
     status:string
+    id:any
 }
 
 type MapDispatchToProps = {
@@ -32,8 +33,13 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 export class ProfileClassComponent extends React.Component<PropsType> {
 
     componentDidMount() {
-        this.props.getProfile(this.props.match.params.userId)
-        this.props.getStatus(this.props.match.params.userId)
+        let id = this.props.match.params.userId
+        if (!id) {
+            console.log(this.props.id)
+            id = "15239"
+        }
+        this.props.getProfile(id)
+        this.props.getStatus(id)
     }
 
     render() {
@@ -49,7 +55,8 @@ export class ProfileClassComponent extends React.Component<PropsType> {
 const MapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         profile: state.profilePage.profile,
-        status:state.profilePage.status
+        status:state.profilePage.status,
+        id:state.profilePage.profile.userId
     }
 }
 
