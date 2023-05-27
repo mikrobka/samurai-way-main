@@ -4,7 +4,7 @@ import s from "./Music.module.css"
 
 export const Music = () => {
     return(
-        <div>
+        <div className={s.notice}>
             MUSIC
         </div>
     )

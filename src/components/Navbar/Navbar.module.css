@@ -1,13 +1,35 @@
 .nav {
-    grid-area: n;
-    background-color: tan;
-    padding: 20px;
-}
-.item a{
-    color: aliceblue;
-    text-decoration: none;
+    grid-area: nav;
+    background: white;
+
+    min-height: 100vh;
+    /* max-height: 100vh; */
+    margin-left: 40px;
+    border-radius: 6px;
+
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.1);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.1);
+    box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.1);
 }
 
-.item a.active{
-    color:dimgray;
+.nav > ul {
+    padding: 40px;
+    position: sticky;
+    top: 0;
+}
+
+.nav > ul > li {
+    list-style-type: none;
+    margin-bottom: 14px;
+}
+
+.nav > ul > li > a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.nav > ul > li > a:hover {
+    font-weight: 700 !important;
 }

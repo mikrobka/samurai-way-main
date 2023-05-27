@@ -10,15 +10,18 @@ type PostPropsType = {
 
 export function Post(props:PostPropsType) {
     return (
-        <div className={s.item}>
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwnOYzJFxPyCk11rdkPsVHRaWW62B0_Du8Vw&usqp=CAU"/>
-            {props.message}
+        <li className={s.post}>
+            <img src={'ava'} alt={'id'} />
             <div>
-                <span>{props.like} likes</span>
+                <p>{'text'}</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Ei-like.svg/1200px-Ei-like.svg.png" />
+                <span>{'likes'}</span>
+                <button >
+                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px"><path d="M 39.486328 6.9785156 A 1.50015 1.50015 0 0 0 38.439453 7.4394531 L 24 21.878906 L 9.5605469 7.4394531 A 1.50015 1.50015 0 0 0 8.484375 6.984375 A 1.50015 1.50015 0 0 0 7.4394531 9.5605469 L 21.878906 24 L 7.4394531 38.439453 A 1.50015 1.50015 0 1 0 9.5605469 40.560547 L 24 26.121094 L 38.439453 40.560547 A 1.50015 1.50015 0 1 0 40.560547 38.439453 L 26.121094 24 L 40.560547 9.5605469 A 1.50015 1.50015 0 0 0 39.486328 6.9785156 z"/></svg>
+                </button>
             </div>
 
-        </div>
+        </li>
     );
 
 

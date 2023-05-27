@@ -4,6 +4,7 @@ import {followingInProgress, FollowingProgressType, InitialStateType} from "../.
 import {NavLink} from "react-router-dom";
 
 import { followAPI} from "../../api/api";
+import User from "./User/User";
 
 type UserPropsType = {
     pages: Array<number>

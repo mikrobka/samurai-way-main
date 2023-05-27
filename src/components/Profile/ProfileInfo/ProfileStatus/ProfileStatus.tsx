@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import s from './ProfileStatus.module.css'
 
 
 type ProfileStatusPropsType = {
@@ -49,21 +50,21 @@ type ProfileStatusPropsType = {
 
      render() {
         return (
-            <>
+            <li className={s.status_wrapper}>
                 {
                     this.state.editMode
                         ?
-                        <div>
+
                              <input onChange={this.onStatusChange}  autoFocus onBlur={this.deactivateEditMode} value={this.state.status}></input>
-                        </div>
+
                         :
-                        <div>
+
                             <span onDoubleClick={this.activateEditMode}>{!this.props.status ? "Status" : this.props.status}</span>
-                        </div>
+
                 }
 
 
-            </>
+            </li>
         );
     }
 

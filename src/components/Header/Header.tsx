@@ -1,25 +1,32 @@
 import React from "react";
 import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
-import {AuthType, InitialStateType, logoutData} from "../../redux/auth-reducer";
+import {InitialStateType} from "../../redux/auth-reducer";
+import logo from '../../assets/logo.svg'
 
 type HeaderPropsType = {
-    auth:InitialStateType
-    logoutData:()=>void
+    auth: InitialStateType
+    logoutData: () => void
 }
 
-export const  Header:React.FC<HeaderPropsType> = (props) => {
-    return(
+export const Header: React.FC<HeaderPropsType> = (props) => {
+    return (
 
         <header className={s.header}>
-            <img className={s.header_img}
-                src="https://e7.pngegg.com/pngimages/437/592/png-clipart-emblem-logo-brand-product-small-mechanical-nuts-emblem-logo.png"
-            alt={"Not found"}/>
-
-            <div className={s.loginBlock}>
-                {props.auth.isAuth ? <div>{props.auth.login} - <NavLink to={'/login'} onClick={props.logoutData}>Log out</NavLink></div> : <NavLink  to={'/login'}>Log in</NavLink> }
+            <div>
+                <img src={logo} alt=""/>
+                <h3>killer vk 1.0</h3>
+            </div>
+            <div className={s.login_block}>
+                {props.auth.isAuth ?
+                    <div className={s.logout}>
+                        <p>{props.auth.login}</p>
+                        <button onClick={props.logoutData}>Logout</button>
+                    </div> :
+                    <NavLink className={s.login_btn} to="/login">Login</NavLink>
+                }
             </div>
 
         </header>
     );
- }
+}
