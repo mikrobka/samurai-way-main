@@ -2,7 +2,7 @@
   "name": "samurai-way",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://mikrobka.github.io/1-todolist",
+  "homepage": "http://mikrobka.github.io/samurai-way-main",
   "dependencies": {
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
@@ -15,6 +15,7 @@
     "jest": "27.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.44.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "5.3.0",
     "react-scripts": "5.0.0",

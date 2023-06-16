@@ -31,6 +31,7 @@ const MapStateToProps = (state:AppStateType): MapStateToPropsType => ({isAuth: s
         <div>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
+            <a href={'https://social-network.samuraijs.com/signUp'} >Sign Up</a>
         </div>
     );
 };

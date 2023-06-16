@@ -6,7 +6,6 @@ export const requiredField = (value: string) => {
     }
 }
 
-
 export const maxLength = (size: number ) => {
     return (value: string) => {
         if (value && value.length < size) {

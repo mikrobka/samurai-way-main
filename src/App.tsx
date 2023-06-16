@@ -10,8 +10,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login";
-
-
+import LoginTest from "./components/Login/LoginTest/LoginTest";
 
 
 const App: React.FC = () => {
@@ -24,7 +23,7 @@ const App: React.FC = () => {
                 {/*// пас ренднрит нам страницу как только видет в аресной строке требуемый урл */}
                 <Route path="/messages" render={() => <DialogsContainer/>}/>
                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                <Route path="/users" render={() => <UsersContainer />}/>
+                <Route path="/users" render={() => <UsersContainer/>}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>

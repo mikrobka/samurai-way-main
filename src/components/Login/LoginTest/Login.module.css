@@ -1,0 +1,93 @@
+.login_form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    background: white;
+    padding: 40px 60px;
+    margin-top: 22px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.title {
+    font-weight: 700;
+    box-sizing: border-box;
+}
+
+.form li {
+    margin-bottom: 18px;
+    box-sizing: border-box;
+}
+
+.field > input {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.field {
+    box-sizing: border-box;
+    /* margin-top: 24px; */
+    margin-bottom: 12px;
+}
+
+.login_btn {
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    background: #1D8BD8;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.login_btn:hover {
+    background: black;
+}
+
+.error {
+    box-sizing: border-box;
+    color: #db0f0f;
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+.field_remember {
+    margin-top: -8px;
+}
+
+.field_remember > input {
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.account_info {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.account_info > a {
+    font-size: 14px;
+    color: #1D8BD8;
+    transition: color 0.3s ease-in-out;
+}
+
+.account_info > a:hover {
+    color: black;
+}
