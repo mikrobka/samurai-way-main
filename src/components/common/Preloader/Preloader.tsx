@@ -1,14 +1,12 @@
-import React from 'react';
-import s from "../../Users/Users.module.css";
-import preloader from "../../../assets/b4d657e7ef262b88eb5f7ac021edda87.gif";
+import s from './Preloader.module.css';
 
-
+import loader from "../../../assets/loader.svg"
 
 export const Preloader = () => {
     return (
-        <div>
-             <img className={s.preloader} src={preloader} alt=""/>
+        <div className={s.loader}>
+            <img src={loader} alt=''/>
         </div>
-    );
-};
+    )
+}
 

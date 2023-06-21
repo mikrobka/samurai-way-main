@@ -3,10 +3,11 @@ import {authAPI} from "../api/api";
 import {FormDataType} from "../components/Login/LoginForm/LoginForm";
 import {stopSubmit} from "redux-form";
 
+
 export type AuthActionType = toggleIsFetchingAT | SetUserDataAT
 
 export type AuthType = {
-    userId: number | null
+    id: number | null
     email: string | null
     login: string | null
 }
@@ -14,7 +15,7 @@ export type AuthType = {
 export type InitialStateType = typeof initialState
 
 const initialState = {
-    userId: null,
+    id: null,
     email: null,
     login: null,
     isFetching: false,
@@ -37,19 +38,17 @@ export type toggleIsFetchingAT = ReturnType<typeof toggleIsFetching>
 export type SetUserDataAT = ReturnType<typeof setUserData>
 
 
-
 export const toggleIsFetching = (isFetching: boolean) => {
     return {type: "TOGGLE-IS-FETCHING", payload: {isFetching}} as const
 }
 export const setUserData = (userData: AuthType, isAuth: boolean) => {
-    return {type: "SET-USER-DATA", payload: {userData,isAuth}} as const
+    return {type: "SET-USER-DATA", payload: {userData, isAuth}} as const
 }
-
 
 
 export const authMyProfile = () => {
     return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.getAuthUser().then(response => {
+      return authAPI.getAuthUser().then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setUserData(response.data.data, true))
             }
@@ -58,14 +57,13 @@ export const authMyProfile = () => {
 }
 
 
-
-export const loginData = (data:FormDataType) => {
+export const loginData = (data: FormDataType) => {
     return (dispatch: Dispatch<AuthActionType>) => {
         authAPI.login(data).then(response => {
             if (response.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(authMyProfile())
-            }else{
+            } else {
                 dispatch(<toggleIsFetchingAT | SetUserDataAT>stopSubmit('login', {_error: response.data.messages[0]}))
             }
         });
@@ -76,7 +74,7 @@ export const logoutData = () => {
     return (dispatch: Dispatch<AuthActionType>) => {
         authAPI.logout().then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setUserData({userId:null,email:null,login:null},false))
+                dispatch(setUserData({id: null, email: null, login: null}, false))
             }
         });
     }

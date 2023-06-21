@@ -3,40 +3,40 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
 import {getProfile, getStatus, ProfileType, updateStatus} from "../../redux/profileReducer";
-import { RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, useParams, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
 type PathParamsType = {
-    userId: string
+    id: string
 }
 
 
 type MapStateToProps = {
     profile: ProfileType
-    status:string
-    id:any
+    status: string
+    id: any
 }
 
 type MapDispatchToProps = {
-    getProfile:(id:string)=>void
-    getStatus:(id:string)=>void
-    updateStatus:(status:string)=>void
+    getProfile: (id: string) => void
+    getStatus: (id: string) => void
+    updateStatus: (status: string) => void
 }
 export type ProfilePropsType = MapStateToProps & MapDispatchToProps
 type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 
-
-
 export class ProfileClassComponent extends React.Component<PropsType> {
-
     componentDidMount() {
-        let id = this.props.match.params.userId
+        let id = Object.keys(this.props.match.params)[0];
         if (!id) {
-            console.log(this.props.id)
-            id = "15239"
+            id = this.props.id
+            if (!id) {
+                debugger
+                this.props.history.push("/login")
+            }
         }
         this.props.getProfile(id)
         this.props.getStatus(id)
@@ -45,7 +45,8 @@ export class ProfileClassComponent extends React.Component<PropsType> {
     render() {
 
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         );
     }
 
@@ -55,13 +56,13 @@ export class ProfileClassComponent extends React.Component<PropsType> {
 const MapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         profile: state.profilePage.profile,
-        status:state.profilePage.status,
-        id:state.profilePage.profile.userId
+        status: state.profilePage.status,
+        id: state.profilePage.profile.userId
     }
 }
 
-// let WithRouteProfile = withRouter(AuthRedirectComponent)
-
-// export default withAuthRedirect (connect(MapStateToProps, {getProfile})(WithRouteProfile))
-
-export default compose<React.ComponentType>(connect(MapStateToProps, {getProfile,updateStatus,getStatus}),withRouter,withAuthRedirect,)(ProfileClassComponent)
+export default compose<React.ComponentType>(connect(MapStateToProps, {
+    getProfile,
+    updateStatus,
+    getStatus
+}), withRouter, withAuthRedirect,)(ProfileClassComponent)
