@@ -1,4 +1,4 @@
-import { ThunkAction } from "redux-thunk";
+import {ThunkAction} from "redux-thunk";
 import {followAPI, usersAPI} from "../api/api";
 import {AppStateType} from "./store";
 import {Dispatch} from "redux";
@@ -107,35 +107,36 @@ export const followingInProgress = (progress: boolean, id: number) => {
 }
 
 
-export const getUser = (currentPage:number,pageSize:number) => {
-    return (dispatch:Dispatch<UserActionType>) =>{
+export const getUser = (page: number, pageSize: number) => {
+    return (dispatch: Dispatch<UserActionType>) => {
         dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(currentPage,pageSize).then(response => {
+        dispatch(setPage(page))
+        usersAPI.getUsers(page, pageSize).then(response => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(response.items))
             dispatch(setTotalUsersCount(response.totalCount))
         });
     }
 }
-export const followUser = (id:number) => {
-    return (dispatch:Dispatch<UserActionType>) =>{
-        dispatch(followingInProgress(true,id))
+export const followUser = (id: number) => {
+    return (dispatch: Dispatch<UserActionType>) => {
+        dispatch(followingInProgress(true, id))
         followAPI.follow(id).then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(follow(id))
-                dispatch(followingInProgress(false,id))
+                dispatch(followingInProgress(false, id))
             }
         })
     }
 }
 
-export const unfollowUser = (id:number) => {
-    return (dispatch:Dispatch<UserActionType>) =>{
-        dispatch(followingInProgress(true,id))
+export const unfollowUser = (id: number) => {
+    return (dispatch: Dispatch<UserActionType>) => {
+        dispatch(followingInProgress(true, id))
         followAPI.unfollow(id).then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(unfollow(id))
-                dispatch(followingInProgress(false,id))
+                dispatch(followingInProgress(false, id))
             }
         })
     }

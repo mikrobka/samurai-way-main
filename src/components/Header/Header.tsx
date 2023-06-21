@@ -14,8 +14,8 @@ export const Header: React.FC<HeaderPropsType> = (props) => {
 
         <header className={s.header}>
             <div>
-                <img src={logo} alt=""/>
-                <h3>killer vk 1.0</h3>
+                <img src={logo}  alt=""/>
+                <h3>Social Network</h3>
                     </div>
                     <div className={s.login_block}>
                     {props.auth.isAuth ?
