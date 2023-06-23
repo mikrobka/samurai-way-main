@@ -1,15 +1,14 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {FollowingProgressType, InitialStateType} from "../../redux/usersReducer";
+import {FollowingProgressType, InitialStateType, UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
-
 
 
 type UserPropsType = {
     pages: Array<number>
     onPageChanged: (p: number) => void
     currentPage: number
-    usersPage: InitialStateType
+    users: Array<UserType>
     unfollowUser: (id: number) => void
     followUser: (id: number) => void
     followingInProgress: (followingInProgress: boolean, id: number) => void
@@ -26,7 +25,7 @@ export const Users = (props: UserPropsType) => {
                                             className={props.currentPage === p ? s.selectedPage : ""}>{p}</span>)}
             </div>
 
-            {props.usersPage.users.map(u => <div key={u.id}>
+            {props.users.map(u => <div key={u.id}>
                 <div>
                     <NavLink to={'/profile/' + u.id}>
                         <div><img className={s.avatar} src={u.photos.small && u.photos.large} alt=""/></div>

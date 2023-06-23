@@ -4,7 +4,7 @@ import {AppStateType} from "../../redux/store";
 import {
     followingInProgress, FollowingProgressType, followUser, getUser,
     InitialStateType, setPage,
-     unfollowUser,
+    unfollowUser, UserType,
 
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
@@ -16,15 +16,16 @@ import {
     getFollowProgress,
     getIsFetching,
     getPageSize,
-    getTotalUsersCount, getUsersPage
+    getTotalUsersCount, getUsersPage, getUsersSuper
 } from "../../redux/users-selectors";
+
 type mapStatePropsType = {
-    usersPage: InitialStateType
+    users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followProgress:Array<FollowingProgressType>
+    followProgress: Array<FollowingProgressType>
 
 
 }
@@ -32,8 +33,8 @@ type MapDispatchPropsType = {
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
     setPage: (currentPage: number) => void
-    followingInProgress:(followProgress:boolean,id:number)=>void
-    getUser: (currentPage:number,pageSize:number) =>void
+    followingInProgress: (followProgress: boolean, id: number) => void
+    getUser: (currentPage: number, pageSize: number) => void
 }
 
 export type UsersPropsType = mapStatePropsType & MapDispatchPropsType
@@ -41,11 +42,11 @@ export type UsersPropsType = mapStatePropsType & MapDispatchPropsType
 
 export class UsersClassComponent extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.getUser(this.props.currentPage,this.props.pageSize)
+        this.props.getUser(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (currentPage: number) => {
-        this.props.getUser(currentPage,this.props.pageSize)
+        this.props.getUser(currentPage, this.props.pageSize)
 
     }
 
@@ -59,10 +60,10 @@ export class UsersClassComponent extends React.Component<UsersPropsType> {
             return (
                 <>
                     {this.props.isFetching ? <Preloader/> : null}
-                    <Users  pages={pages} onPageChanged={this.onPageChanged} currentPage={this.props.currentPage}
-                           followUser={this.props.followUser} usersPage={this.props.usersPage}
+                    <Users pages={pages} onPageChanged={this.onPageChanged} currentPage={this.props.currentPage}
+                           followUser={this.props.followUser} users={this.props.users}
                            unfollowUser={this.props.unfollowUser} followingInProgress={this.props.followingInProgress}
-                            followProgress={this.props.followProgress}
+                           followProgress={this.props.followProgress}
                     />
                 </>
             );
@@ -72,12 +73,12 @@ export class UsersClassComponent extends React.Component<UsersPropsType> {
 
 const mapStateToProps = (state: AppStateType): mapStatePropsType => {
     return {
-        usersPage: getUsersPage(state),
+        users: getUsersSuper(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followProgress:getFollowProgress(state)
+        followProgress: getFollowProgress(state)
     }
 }
 

@@ -1,8 +1,13 @@
 import {AppStateType} from "./store";
+import {createSelector} from "reselect";
 
 export const getUsersPage = (state:AppStateType) => {
     return state.usersPage
 }
+
+export const getUsersSuper = createSelector(getUsersPage,(users) => {
+    return users.users
+})
 export const getPageSize = (state:AppStateType) => {
     return state.usersPage.pageSize
 }
