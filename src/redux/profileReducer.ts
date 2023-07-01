@@ -1,7 +1,7 @@
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-export type ProfileActionType = AddPostAT  | SetUserProfileAT | SetStatusAT
+export type ProfileActionType = AddPostAT | SetUserProfileAT | SetStatusAT | DeletePostAT
 
 export type PostsType = {
     id: number
@@ -64,6 +64,8 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
             return {...state, profile: action.payload.profile}
         case 'SET-STATUS':
             return {...state, status: action.payload.status}
+        case "DElETE-POST":
+            return {...state, postsData: state.postsData.filter(post => post.id !== action.payload.id)}
 
 
     }
@@ -75,9 +77,13 @@ export type AddPostAT = ReturnType<typeof addPost>
 export type SetUserProfileAT = ReturnType<typeof setUserProfile>
 
 export type SetStatusAT = ReturnType<typeof setStatus>
+export type DeletePostAT = ReturnType<typeof deletePost>
 
 export const addPost = (newPostText: string) => {
     return {type: "ADD-POST", payload: {newPostText}} as const
+}
+export const deletePost = (id: number) => {
+    return {type: "DElETE-POST", payload: {id}} as const
 }
 
 export const setUserProfile = (profile: ProfileType) => {
@@ -99,7 +105,7 @@ export const getProfile = (userId: string) => {
 export const getStatus = (userId: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
         profileAPI.getStatus(userId).then(res => {
-            debugger
+
             dispatch(setStatus(res.data))
         })
     }
@@ -109,7 +115,7 @@ export const updateStatus = (status: string) => {
     return (dispatch: Dispatch<ProfileActionType>) => {
         profileAPI.updateStatus(status).then(res => {
             if (res.data.resultCode === 0) {
-                debugger
+
                 dispatch(setStatus(res.data))
             }
         })
