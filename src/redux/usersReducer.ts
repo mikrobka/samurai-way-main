@@ -108,37 +108,45 @@ export const followingInProgress = (progress: boolean, id: number) => {
 
 
 export const getUser = (page: number, pageSize: number) => {
-    return (dispatch: Dispatch<UserActionType>) => {
+    return async (dispatch: Dispatch<UserActionType>) => {
         dispatch(toggleIsFetching(true))
         dispatch(setPage(page))
-        usersAPI.getUsers(page, pageSize).then(response => {
+        const res = await usersAPI.getUsers(page, pageSize)
+        try {
             dispatch(toggleIsFetching(false))
-            dispatch(setUsers(response.items))
-            dispatch(setTotalUsersCount(response.totalCount))
-        });
+            dispatch(setUsers(res.items))
+            dispatch(setTotalUsersCount(res.totalCount))
+        } catch (err) {
+
+        }
     }
 }
 export const followUser = (id: number) => {
-    return (dispatch: Dispatch<UserActionType>) => {
+    return async (dispatch: Dispatch<UserActionType>) => {
         dispatch(followingInProgress(true, id))
-        followAPI.follow(id).then(res => {
+        const res = await followAPI.follow(id)
+        try {
             if (res.data.resultCode === 0) {
                 dispatch(follow(id))
                 dispatch(followingInProgress(false, id))
             }
-        })
+        } catch (err) {
+        }
     }
 }
 
 export const unfollowUser = (id: number) => {
-    return (dispatch: Dispatch<UserActionType>) => {
+    return async (dispatch: Dispatch<UserActionType>) => {
         dispatch(followingInProgress(true, id))
-        followAPI.unfollow(id).then(res => {
+        const res = await followAPI.unfollow(id)
+        try {
             if (res.data.resultCode === 0) {
                 dispatch(unfollow(id))
                 dispatch(followingInProgress(false, id))
             }
-        })
+        } catch (err) {
+        }
+
     }
 }
 

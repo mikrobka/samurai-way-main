@@ -7,7 +7,7 @@ import {AddPostFormType, ReduxPostForm} from "./PostsForm/PostsForm";
 
 export const MyPosts = (props: PostsPropsType) => {
     console.log("Render")
-    const postsElements = props.postsPage.postsData.map(p => <Post message={p.postMessage} like={p.likesCount}/>)
+    const postsElements = props.postsPage.postsData.map(p => <Post key={p.id} message={p.postMessage} like={p.likesCount}/>)
 
     const addPost = (postMessage: AddPostFormType) => {
         props.addPost(postMessage.post)

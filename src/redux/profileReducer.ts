@@ -95,31 +95,45 @@ export const setStatus = (status: string) => {
 }
 
 export const getProfile = (userId: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.getProfile(userId).then(response => {
-            dispatch(setUserProfile(response.data))
-        });
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+        const res = await profileAPI.getProfile(userId)
+        try {
+            if (res.data) {
+                dispatch(setUserProfile(res.data))
+            }
+        } catch (err) {
+
+        }
     }
 }
 
 export const getStatus = (userId: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.getStatus(userId).then(res => {
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+        const res = await profileAPI.getStatus(userId)
+        try {
+            if (res.data) {
+                setStatus(res.data)
+            }
+        } catch (err) {
 
-            dispatch(setStatus(res.data))
-        })
+        }
     }
 }
 
 export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch<ProfileActionType>) => {
-        profileAPI.updateStatus(status).then(res => {
+    return async (dispatch: Dispatch<ProfileActionType>) => {
+        const res = await profileAPI.updateStatus(status)
+        try {
             if (res.data.resultCode === 0) {
 
                 dispatch(setStatus(res.data))
             }
-        })
+
+        } catch (err) {
+
+        }
     }
+
 }
 
 

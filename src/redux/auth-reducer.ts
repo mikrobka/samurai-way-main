@@ -47,36 +47,45 @@ export const setUserData = (userData: AuthType, isAuth: boolean) => {
 
 
 export const authMyProfile = () => {
-    return (dispatch: Dispatch<AuthActionType>) => {
-      return authAPI.getAuthUser().then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserData(response.data.data, true))
+    return async (dispatch: Dispatch<AuthActionType>) => {
+        const res = await authAPI.getAuthUser()
+        try {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserData(res.data.data, true))
             }
-        });
+        } catch (err) {
+
+        }
+
     }
 }
 
 
 export const loginData = (data: FormDataType) => {
-    return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.login(data).then(response => {
-            if (response.data.resultCode === 0) {
+    return async (dispatch: Dispatch<AuthActionType>) => {
+        const res = await authAPI.login(data)
+        try {
+            if (res.data.resultCode === 0) {
                 // @ts-ignore
                 dispatch(authMyProfile())
-            } else {
-                dispatch(<toggleIsFetchingAT | SetUserDataAT>stopSubmit('login', {_error: response.data.messages[0]}))
             }
-        });
+        } catch (err) {
+            dispatch(<toggleIsFetchingAT | SetUserDataAT>stopSubmit('login', {_error: res.data.messages[0]}))
+        }
     }
 }
 
 export const logoutData = () => {
-    return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.logout().then(response => {
-            if (response.data.resultCode === 0) {
+    return async (dispatch: Dispatch<AuthActionType>) => {
+        const res = await authAPI.logout()
+        try {
+            if (res.data.resultCode === 0) {
                 dispatch(setUserData({id: null, email: null, login: null}, false))
             }
-        });
+        } catch (err) {
+
+        }
+
     }
 }
 
