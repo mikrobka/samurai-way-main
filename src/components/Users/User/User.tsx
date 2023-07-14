@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 import s from './User.module.css';
 
-import userAva from '../../../assets/images/user-ava.png';
+import userAva from '../../../assets/avatar.png';
 import { FC } from 'react';
-import {FollowingProgressType, UserType} from "../../../redux/usersReducer";
+// @ts-ignore
+import {FollowingProgressType, UserType} from "src/redux/usersReducer";
 
 type PropsType = {
     user: UserType,
@@ -43,10 +44,7 @@ const User: FC<PropsType> = ({user, unfollowUser, followUser, isFollowingProgres
             <div className={s.user_info}>
                 <NavLink to={`/profile/${user.id}`} className={s.user_info_link}>
                     <h3>{user.name}</h3>
-                    {/* <div className={s.location}>
-                        <span>Test Country,</span>
-                        <span>Test city</span>
-                    </div> */}
+                    <h4>{user.status}</h4>
                     {user.followed ?
                         <button
                             onClick={(e) => unfollow(e, user.id)}
