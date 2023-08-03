@@ -45,25 +45,26 @@ export class UsersClassComponent extends React.Component<UsersPropsType> {
         this.props.getUser(this.props.currentPage, this.props.pageSize)
     }
 
+
     onPageChanged = (currentPage: number) => {
         this.props.getUser(currentPage, this.props.pageSize)
 
     }
 
     render() {
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        let pages = [1]
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
         {
             return (
                 <>
                     {this.props.isFetching ? <Preloader/> : null}
-                    <Users pages={pages} onPageChanged={this.onPageChanged} currentPage={this.props.currentPage}
-                           followUser={this.props.followUser} users={this.props.users}
-                           unfollowUser={this.props.unfollowUser} followingInProgress={this.props.followingInProgress}
-                           followProgress={this.props.followProgress}
+                    <Users
+                        changePage={this.onPageChanged}
+                        setCurrentPage={this.props.setPage}
+                        currentPage={this.props.currentPage}
+                        totalUsersCount={this.props.totalUsersCount}
+                        pageSize={this.props.pageSize}
+                        followUser={this.props.followUser} users={this.props.users}
+                        unfollowUser={this.props.unfollowUser}
+                        followProgress={this.props.followProgress}
                     />
                 </>
             );

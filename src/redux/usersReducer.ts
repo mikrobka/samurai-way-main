@@ -34,8 +34,8 @@ export type InitialStateType = typeof initialState
 const initialState = {
     users: [] as Array<UserType>,
     pageSize: 10 as number,
-    totalUsersCount: 100 as number,
-    currentPage: 4 as number,
+    totalUsersCount: 0 as number,
+    currentPage: 1 as number,
     isFetching: true as boolean,
     followed: false as boolean,
     followProgress: [] as Array<FollowingProgressType>
@@ -59,7 +59,7 @@ export const userReducer = (state: InitialStateType = initialState, action: User
         case "SET-PAGE":
             return {...state, currentPage: action.payload.currentPage}
         case "SET-TOTAL-USERS-COUNT":
-            return {...state, currentPage: action.payload.totalUsersCount}
+            return {...state, totalUsersCount: action.payload.totalUsersCount}
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.payload.isFetching}
         case 'FOLLOWING-IN-PROGRESS':
@@ -112,6 +112,7 @@ export const getUser = (page: number, pageSize: number) => {
         dispatch(toggleIsFetching(true))
         dispatch(setPage(page))
         const res = await usersAPI.getUsers(page, pageSize)
+        debugger
         try {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(res.items))
