@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 
 import s from './User.module.css';
 
 import userAva from '../../../assets/avatar.png';
-import { FC } from 'react';
+import {FC} from 'react';
 // @ts-ignore
 import {FollowingProgressType, UserType} from "src/redux/usersReducer";
 
@@ -35,8 +35,8 @@ const User: FC<PropsType> = ({user, unfollowUser, followUser, isFollowingProgres
                 <NavLink to={`/profile/${user.id}`} className={s.user_link}>
                     <span className={s.ava}>
                         {user.photos.small ?
-                            <img className={s.ava} src={user.photos.small} alt={user.name} /> :
-                            <img className={s.ava} src={userAva} alt={user.name} />
+                            <img className={s.ava} src={user.photos.small} alt={user.name}/> :
+                            <img className={s.ava} src={userAva} alt={user.name}/>
                         }
                     </span>
                 </NavLink>

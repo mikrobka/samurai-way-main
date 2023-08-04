@@ -11,6 +11,7 @@ export type UserActionType =
     | setTotalUsersCountAT
     | toggleIsFetchingAT
     | followingInProgressAT
+
 export type UserType = {
     id: number
     followed: boolean
@@ -112,7 +113,6 @@ export const getUser = (page: number, pageSize: number) => {
         dispatch(toggleIsFetching(true))
         dispatch(setPage(page))
         const res = await usersAPI.getUsers(page, pageSize)
-        debugger
         try {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(res.items))
