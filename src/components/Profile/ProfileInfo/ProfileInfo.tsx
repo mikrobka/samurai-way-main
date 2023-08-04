@@ -5,30 +5,29 @@ import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 
-
-
-
 type ProfileInfoPropsType = {
-    profile:ProfileType
-    status:string
-    updateStatus:(status:string)=>void
+    profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
-export const ProfileInfo = (props:ProfileInfoPropsType) => {
+export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
-    if(!props.profile){ // если не пришел профайл показываем прелоадер
+    console.log(props.profile)
+    const withOutAvatar = 'https://static.prinseps.com/media/uploads/cryptopunk6278.png';
+
+    if (!props.profile) { // если не пришел профайл показываем прелоадер
         return <Preloader/>
-    }
-    else {
+    } else {
         return (
             <div>
-                {/*<div className={""}>*/}
-                {/*    <img*/}
-                {/*        src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg" alt={""}/>*/}
-                {/*</div>*/}
                 <div className={s.discriptionBlock}>
+                    <picture>
+                        <img src={props.profile.photos.large ? props.profile.photos.large : withOutAvatar}
+                             alt={props.profile.fullName}/>
+                    </picture>
                     <div>{props.profile.fullName}</div>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                    <ProfileStatus status={props.profile.aboutMe} updateStatus={props.updateStatus}/>
                     ava+discription
                 </div>
             </div>

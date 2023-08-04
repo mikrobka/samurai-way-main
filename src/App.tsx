@@ -50,7 +50,7 @@ class App extends Component<PropsType> {
                     <div className="app-wrapper-content">
                         {/*// пас ренднрит нам страницу как только видет в аресной строке требуемый урл */}
                         <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path={`/profile/:${this.props.id}?`} render={() => <ProfileContainer/>}/>
+                        <Route path={`/profile/:userId?`} render={() => <ProfileContainer/>}/>
                         <Route path="/users" render={() => <UsersContainer/>}/>
                         <Route path="/news" render={() => <News/>}/>
                         <Route path="/music" render={() => <Music/>}/>
