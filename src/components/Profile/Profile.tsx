@@ -12,6 +12,7 @@ type ProfilePropsType = {
 
 
 export const Profile:React.FC<ProfilePropsType> = (props) => {
+    debugger
     return (
         <div className={s.content}>
             <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>

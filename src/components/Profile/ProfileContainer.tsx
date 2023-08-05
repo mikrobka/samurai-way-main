@@ -9,7 +9,7 @@ import {compose} from "redux";
 
 
 type PathParamsType = {
-    id: string
+    userId:string
 }
 
 
@@ -30,7 +30,7 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 export class ProfileClassComponent extends React.Component<PropsType> {
     componentDidMount() {
-        let id = Object.keys(this.props.match.params)[0];
+        let id = this.props.match.params.userId
         if (!id) {
             id = this.props.id
             if (!id) {
